@@ -1,0 +1,67 @@
+com.corecue.fitness.app-fragment-1.8.5-0 C:\Users\Dell\.gradle\caches\8.9\transforms\0b58a513f7dc5c73371ef7426f73965f\transformed\fragment-1.8.5\res
+com.corecue.fitness.app-sqlite-framework-2.4.0-1 C:\Users\Dell\.gradle\caches\8.9\transforms\1026c242d885ca7b8fcdf51d354804e9\transformed\sqlite-framework-2.4.0\res
+com.corecue.fitness.app-annotation-experimental-1.4.1-2 C:\Users\Dell\.gradle\caches\8.9\transforms\1114413252679e59d43eaece5047f90b\transformed\annotation-experimental-1.4.1\res
+com.corecue.fitness.app-customview-poolingcontainer-1.0.0-3 C:\Users\Dell\.gradle\caches\8.9\transforms\15a854a1d01d59fcdb961b63efa0a031\transformed\customview-poolingcontainer-1.0.0\res
+com.corecue.fitness.app-media-1.7.0-4 C:\Users\Dell\.gradle\caches\8.9\transforms\19e589c2c914aff72fbfd7112b7ec572\transformed\media-1.7.0\res
+com.corecue.fitness.app-startup-runtime-1.1.1-5 C:\Users\Dell\.gradle\caches\8.9\transforms\1c13e00d71310d5140de004df8f140a0\transformed\startup-runtime-1.1.1\res
+com.corecue.fitness.app-emoji2-views-helper-1.3.0-6 C:\Users\Dell\.gradle\caches\8.9\transforms\1dc1ab17151804a81bcb3bf6a9f40263\transformed\emoji2-views-helper-1.3.0\res
+com.corecue.fitness.app-emoji2-1.3.0-7 C:\Users\Dell\.gradle\caches\8.9\transforms\21e5368f10f6d1b304638048d0a67831\transformed\emoji2-1.3.0\res
+com.corecue.fitness.app-cardview-1.0.0-8 C:\Users\Dell\.gradle\caches\8.9\transforms\29a4430239e01c70412f5defb8aa700e\transformed\cardview-1.0.0\res
+com.corecue.fitness.app-profileinstaller-1.4.0-9 C:\Users\Dell\.gradle\caches\8.9\transforms\2b2c5f410cf74d0781758fb1d4aad51c\transformed\profileinstaller-1.4.0\res
+com.corecue.fitness.app-navigation-fragment-ktx-2.8.5-10 C:\Users\Dell\.gradle\caches\8.9\transforms\3232f9aeea2fb849ddcf068f4eb8abd5\transformed\navigation-fragment-ktx-2.8.5\res
+com.corecue.fitness.app-camera-video-1.4.1-11 C:\Users\Dell\.gradle\caches\8.9\transforms\36a56adf35c8dd15ddd6e0cae673e1f9\transformed\camera-video-1.4.1\res
+com.corecue.fitness.app-navigation-common-ktx-2.8.5-12 C:\Users\Dell\.gradle\caches\8.9\transforms\458135c5e40c0f4c9bb3df88beb85134\transformed\navigation-common-ktx-2.8.5\res
+com.corecue.fitness.app-lifecycle-viewmodel-release-13 C:\Users\Dell\.gradle\caches\8.9\transforms\491c95a79fdd7d21ff11cee9d4254de9\transformed\lifecycle-viewmodel-release\res
+com.corecue.fitness.app-tracing-1.2.0-14 C:\Users\Dell\.gradle\caches\8.9\transforms\4eba2f4ebab38b0e205c8612d369691f\transformed\tracing-1.2.0\res
+com.corecue.fitness.app-glide-4.16.0-15 C:\Users\Dell\.gradle\caches\8.9\transforms\5424381569a80d97825ad2c1d0349675\transformed\glide-4.16.0\res
+com.corecue.fitness.app-core-runtime-2.2.0-16 C:\Users\Dell\.gradle\caches\8.9\transforms\5cba8b8bc0c14586ab85a383d3b53c74\transformed\core-runtime-2.2.0\res
+com.corecue.fitness.app-window-1.0.0-17 C:\Users\Dell\.gradle\caches\8.9\transforms\5d6828306ab92364abd0dc553cb08d30\transformed\window-1.0.0\res
+com.corecue.fitness.app-core-1.15.0-18 C:\Users\Dell\.gradle\caches\8.9\transforms\61e8195abd488968b2e5e748d6dbda0b\transformed\core-1.15.0\res
+com.corecue.fitness.app-activity-1.10.0-19 C:\Users\Dell\.gradle\caches\8.9\transforms\62f10c59d98e1616c7acad53e4d81fe7\transformed\activity-1.10.0\res
+com.corecue.fitness.app-lifecycle-viewmodel-savedstate-2.8.7-20 C:\Users\Dell\.gradle\caches\8.9\transforms\667f18f7e89caf7cbcdfbf4219940dda\transformed\lifecycle-viewmodel-savedstate-2.8.7\res
+com.corecue.fitness.app-navigation-runtime-2.8.5-21 C:\Users\Dell\.gradle\caches\8.9\transforms\70234ea5c8d7e60c0300f569dd5ee29f\transformed\navigation-runtime-2.8.5\res
+com.corecue.fitness.app-transition-1.5.0-22 C:\Users\Dell\.gradle\caches\8.9\transforms\72f8176c497641ec52c1749d22c9c9ce\transformed\transition-1.5.0\res
+com.corecue.fitness.app-camera-view-1.4.1-23 C:\Users\Dell\.gradle\caches\8.9\transforms\778a640040e2bfef2c91841333b83ed9\transformed\camera-view-1.4.1\res
+com.corecue.fitness.app-sqlite-2.4.0-24 C:\Users\Dell\.gradle\caches\8.9\transforms\7adacfb5c4383d3560d42f012f0cb15b\transformed\sqlite-2.4.0\res
+com.corecue.fitness.app-camera-lifecycle-1.4.1-25 C:\Users\Dell\.gradle\caches\8.9\transforms\801edf2b619ea29c0837fb0bb8b8a6b2\transformed\camera-lifecycle-1.4.1\res
+com.corecue.fitness.app-appcompat-resources-1.7.0-26 C:\Users\Dell\.gradle\caches\8.9\transforms\858c4ae30e292952bccff644f4c05bbd\transformed\appcompat-resources-1.7.0\res
+com.corecue.fitness.app-camera-core-1.4.1-27 C:\Users\Dell\.gradle\caches\8.9\transforms\870a8f95e915e733d170eb869de1104f\transformed\camera-core-1.4.1\res
+com.corecue.fitness.app-lifecycle-runtime-release-28 C:\Users\Dell\.gradle\caches\8.9\transforms\8cec6ef1708ddd11c344308ec1aae3d4\transformed\lifecycle-runtime-release\res
+com.corecue.fitness.app-tracing-ktx-1.2.0-29 C:\Users\Dell\.gradle\caches\8.9\transforms\9305117ab9810444c9e646b373d0826e\transformed\tracing-ktx-1.2.0\res
+com.corecue.fitness.app-fragment-ktx-1.8.5-30 C:\Users\Dell\.gradle\caches\8.9\transforms\940ec004b1526a94260cd45cb08da595\transformed\fragment-ktx-1.8.5\res
+com.corecue.fitness.app-constraintlayout-2.2.0-31 C:\Users\Dell\.gradle\caches\8.9\transforms\94563be9f5cdbb3dfbabfdca298c7ec1\transformed\constraintlayout-2.2.0\res
+com.corecue.fitness.app-navigation-ui-ktx-2.8.5-32 C:\Users\Dell\.gradle\caches\8.9\transforms\979e1ec44e0709efb7452fe458b519e7\transformed\navigation-ui-ktx-2.8.5\res
+com.corecue.fitness.app-camera-camera2-1.4.1-33 C:\Users\Dell\.gradle\caches\8.9\transforms\9faf4b1f2338d53bc6c15e522acfaf59\transformed\camera-camera2-1.4.1\res
+com.corecue.fitness.app-activity-ktx-1.10.0-34 C:\Users\Dell\.gradle\caches\8.9\transforms\a140400253580e0d9de6bdc2adf9d154\transformed\activity-ktx-1.10.0\res
+com.corecue.fitness.app-navigation-fragment-2.8.5-35 C:\Users\Dell\.gradle\caches\8.9\transforms\a9c8187b2a068ac09983b24205db700a\transformed\navigation-fragment-2.8.5\res
+com.corecue.fitness.app-material-1.12.0-36 C:\Users\Dell\.gradle\caches\8.9\transforms\aa4a0ba05a5bb8cbf589f13199e63d77\transformed\material-1.12.0\res
+com.corecue.fitness.app-slidingpanelayout-1.2.0-37 C:\Users\Dell\.gradle\caches\8.9\transforms\ab000cb9af7f8dd6dcd0dd410c055fd2\transformed\slidingpanelayout-1.2.0\res
+com.corecue.fitness.app-drawerlayout-1.1.1-38 C:\Users\Dell\.gradle\caches\8.9\transforms\b0fe5de25364df378ab8092e8b9e6077\transformed\drawerlayout-1.1.1\res
+com.corecue.fitness.app-lifecycle-viewmodel-ktx-2.8.7-39 C:\Users\Dell\.gradle\caches\8.9\transforms\b4bc3fb05747e35a58c5efc1617bd693\transformed\lifecycle-viewmodel-ktx-2.8.7\res
+com.corecue.fitness.app-room-runtime-2.6.1-40 C:\Users\Dell\.gradle\caches\8.9\transforms\b563bc8e97ff71ab8a3a1f39a5afca6d\transformed\room-runtime-2.6.1\res
+com.corecue.fitness.app-lifecycle-livedata-ktx-2.8.7-41 C:\Users\Dell\.gradle\caches\8.9\transforms\b63c09a5888c2826d9713e24f803b3b9\transformed\lifecycle-livedata-ktx-2.8.7\res
+com.corecue.fitness.app-lifecycle-livedata-core-2.8.7-42 C:\Users\Dell\.gradle\caches\8.9\transforms\c3c6b6304ec9c3fbff605e55f0d91343\transformed\lifecycle-livedata-core-2.8.7\res
+com.corecue.fitness.app-navigation-common-2.8.5-43 C:\Users\Dell\.gradle\caches\8.9\transforms\c45f6c3fb2f43bf498a4f447d98a8b21\transformed\navigation-common-2.8.5\res
+com.corecue.fitness.app-core-ktx-1.15.0-44 C:\Users\Dell\.gradle\caches\8.9\transforms\c5b9ac4272c34e9d10a7e67611caf08b\transformed\core-ktx-1.15.0\res
+com.corecue.fitness.app-viewpager2-1.0.0-45 C:\Users\Dell\.gradle\caches\8.9\transforms\ca25f1130c86ebec057e2278f51cd282\transformed\viewpager2-1.0.0\res
+com.corecue.fitness.app-lifecycle-livedata-2.8.7-46 C:\Users\Dell\.gradle\caches\8.9\transforms\cadb4bc91e75469d350c6c15b7e5ae84\transformed\lifecycle-livedata-2.8.7\res
+com.corecue.fitness.app-lifecycle-livedata-core-ktx-2.8.7-47 C:\Users\Dell\.gradle\caches\8.9\transforms\cc873a6f23f4b92973b17729c4b6a577\transformed\lifecycle-livedata-core-ktx-2.8.7\res
+com.corecue.fitness.app-coordinatorlayout-1.1.0-48 C:\Users\Dell\.gradle\caches\8.9\transforms\d5227fb354949f32a0fee61877c649e2\transformed\coordinatorlayout-1.1.0\res
+com.corecue.fitness.app-navigation-runtime-ktx-2.8.5-49 C:\Users\Dell\.gradle\caches\8.9\transforms\d9b7d3f497c1e4b9c8e5f746156a2091\transformed\navigation-runtime-ktx-2.8.5\res
+com.corecue.fitness.app-room-ktx-2.6.1-50 C:\Users\Dell\.gradle\caches\8.9\transforms\da0652e6c01d4efceb6208e0b9487c09\transformed\room-ktx-2.6.1\res
+com.corecue.fitness.app-lifecycle-process-2.8.7-51 C:\Users\Dell\.gradle\caches\8.9\transforms\de12ad93e83f261911e56c63b7ccb3f1\transformed\lifecycle-process-2.8.7\res
+com.corecue.fitness.app-recyclerview-1.3.0-52 C:\Users\Dell\.gradle\caches\8.9\transforms\e529d4821a7033d17077e5cfa0bf6359\transformed\recyclerview-1.3.0\res
+com.corecue.fitness.app-navigation-ui-2.8.5-53 C:\Users\Dell\.gradle\caches\8.9\transforms\f009464ab568532df38f47e2bf3ec14b\transformed\navigation-ui-2.8.5\res
+com.corecue.fitness.app-savedstate-ktx-1.2.1-54 C:\Users\Dell\.gradle\caches\8.9\transforms\f43019df609ed360982d813495243f85\transformed\savedstate-ktx-1.2.1\res
+com.corecue.fitness.app-lottie-6.6.1-55 C:\Users\Dell\.gradle\caches\8.9\transforms\f43328d1516f2c051f10626d9525c7f6\transformed\lottie-6.6.1\res
+com.corecue.fitness.app-media3-exoplayer-1.5.1-56 C:\Users\Dell\.gradle\caches\8.9\transforms\fa130b2c5c9a89f12100e6a19c54ea0a\transformed\media3-exoplayer-1.5.1\res
+com.corecue.fitness.app-appcompat-1.7.0-57 C:\Users\Dell\.gradle\caches\8.9\transforms\fb19175ae213c2a8a814d346aaf1cdfe\transformed\appcompat-1.7.0\res
+com.corecue.fitness.app-savedstate-1.2.1-58 C:\Users\Dell\.gradle\caches\8.9\transforms\feaa38f13ef1d8ef2bdba401476895f9\transformed\savedstate-1.2.1\res
+com.corecue.fitness.app-media3-ui-1.5.1-59 C:\Users\Dell\.gradle\caches\8.9\transforms\ff8932756dd43bd1bb352212ebc77e7c\transformed\media3-ui-1.5.1\res
+com.corecue.fitness.app-lifecycle-runtime-ktx-release-60 C:\Users\Dell\.gradle\caches\8.9\transforms\ffff9d50dad500759253e19a3c6cad7e\transformed\lifecycle-runtime-ktx-release\res
+com.corecue.fitness.app-resValues-61 D:\Android Projects\AIML Pilates exercise Assitance[POC]\app\build\generated\res\resValues\debug
+com.corecue.fitness.app-packageDebugResources-62 D:\Android Projects\AIML Pilates exercise Assitance[POC]\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.corecue.fitness.app-packageDebugResources-63 D:\Android Projects\AIML Pilates exercise Assitance[POC]\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.corecue.fitness.app-debug-64 D:\Android Projects\AIML Pilates exercise Assitance[POC]\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.corecue.fitness.app-debug-65 D:\Android Projects\AIML Pilates exercise Assitance[POC]\app\src\debug\res
+com.corecue.fitness.app-main-66 D:\Android Projects\AIML Pilates exercise Assitance[POC]\app\src\main\res

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="accent_blue">#7FA7FF</color>
+    <color name="accent_lavender">#B79CFF</color>
+    <color name="bg_dark">#090B16</color>
+    <color name="card_dark">#151B32</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">CoreCue Fitness POC</string>
+    <style name="Theme.CoreCueFitnessPOC" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorSecondary">@color/accent_lavender</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowLightStatusBar" ns1:targetApi="m">false</item>
+    </style>
+</resources>
