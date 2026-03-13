@@ -3178,7 +3178,9 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_calibration_silhouette
 drawable bg_gradient
+drawable bg_recording_controls
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3281,6 +3283,7 @@ drawable ic_call_answer_video
 drawable ic_call_answer_video_low
 drawable ic_call_decline
 drawable ic_call_decline_low
+drawable ic_check_24
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_ex_hamstring
@@ -3298,8 +3301,11 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_nav_history
 drawable ic_nav_home
 drawable ic_nav_profile
+drawable ic_pause_24
 drawable ic_search_black_24
 drawable ic_splash_logo
+drawable ic_stop_24
+drawable ic_switch_camera
 drawable indeterminate_static
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
@@ -3377,6 +3383,7 @@ drawable silhouette_outline
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font poppins_regular
 font roboto_medium_numbers
 id ALT
 id BOTTOM_END
@@ -3439,6 +3446,7 @@ id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
 id action_calibration_to_demo
+id action_calibration_to_recording
 id action_container
 id action_context_bar
 id action_demo_to_recording
@@ -3485,7 +3493,6 @@ id blocking
 id body_part_scores
 id body_radar_chart
 id bottom
-id bottom_nav
 id bounce
 id bounceBoth
 id bounceEnd
@@ -3678,7 +3685,6 @@ id header_title
 id hero_icon
 id hide_ime_id
 id hideable
-id historyFragment
 id history_text
 id home
 id homeAsUp
@@ -3715,6 +3721,7 @@ id line3
 id linear
 id listMode
 id list_item
+id loading
 id locale
 id logo
 id lottie_layer_name
@@ -3846,7 +3853,6 @@ id position
 id postLayout
 id pressed
 id preview_view
-id profileFragment
 id progress_circular
 id progress_horizontal
 id prompt_text

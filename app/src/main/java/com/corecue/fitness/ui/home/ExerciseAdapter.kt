@@ -3,7 +3,6 @@ package com.corecue.fitness.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.corecue.fitness.data.model.Exercise
 import com.corecue.fitness.R
 import com.corecue.fitness.databinding.ItemExerciseBinding
@@ -42,16 +41,7 @@ class ExerciseAdapter(
                 "hamstring_pull" -> R.drawable.ic_ex_hamstring
                 else -> R.drawable.ic_illustration_pose
             }
-            if (item.thumbnailUrl.isBlank()) {
-                binding.thumb.setImageResource(localIcon)
-            } else {
-                Glide.with(binding.thumb)
-                    .load(item.thumbnailUrl)
-                    .placeholder(localIcon)
-                    .error(localIcon)
-                    .centerCrop()
-                    .into(binding.thumb)
-            }
+            binding.thumb.setImageResource(localIcon)
             binding.startBtn.setOnClickListener { onStart(item) }
         }
     }

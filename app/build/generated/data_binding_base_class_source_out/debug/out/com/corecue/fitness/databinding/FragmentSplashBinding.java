@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,15 +25,19 @@ public final class FragmentSplashBinding implements ViewBinding {
   public final ImageView heroIcon;
 
   @NonNull
+  public final ProgressBar loading;
+
+  @NonNull
   public final TextView logo;
 
   @NonNull
   public final TextView subtitle;
 
   private FragmentSplashBinding(@NonNull ConstraintLayout rootView, @NonNull ImageView heroIcon,
-      @NonNull TextView logo, @NonNull TextView subtitle) {
+      @NonNull ProgressBar loading, @NonNull TextView logo, @NonNull TextView subtitle) {
     this.rootView = rootView;
     this.heroIcon = heroIcon;
+    this.loading = loading;
     this.logo = logo;
     this.subtitle = subtitle;
   }
@@ -70,6 +75,12 @@ public final class FragmentSplashBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.loading;
+      ProgressBar loading = ViewBindings.findChildViewById(rootView, id);
+      if (loading == null) {
+        break missingId;
+      }
+
       id = R.id.logo;
       TextView logo = ViewBindings.findChildViewById(rootView, id);
       if (logo == null) {
@@ -82,7 +93,8 @@ public final class FragmentSplashBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentSplashBinding((ConstraintLayout) rootView, heroIcon, logo, subtitle);
+      return new FragmentSplashBinding((ConstraintLayout) rootView, heroIcon, loading, logo,
+          subtitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

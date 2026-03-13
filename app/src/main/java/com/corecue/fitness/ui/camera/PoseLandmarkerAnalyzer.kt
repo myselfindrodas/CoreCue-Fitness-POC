@@ -19,6 +19,7 @@ class PoseLandmarkerAnalyzer(
 ) : ImageAnalysis.Analyzer {
 
     private var landmarker: PoseLandmarker? = null
+    @Volatile private var isClosed = false
 
     init {
         createLandmarker(context)
@@ -45,11 +46,22 @@ class PoseLandmarkerAnalyzer(
     }
 
     override fun analyze(image: ImageProxy) {
-        val bitmap = image.toBitmap()
-        val result = detect(bitmap, image.imageInfo.rotationDegrees)
-        onLandmarks(result.first)
-        onPoseSignal(result.second, result.third)
-        image.close()
+        if (isClosed) {
+            image.close()
+            return
+        }
+        try {
+            val bitmap = image.toBitmap()
+            val result = detect(bitmap, image.imageInfo.rotationDegrees)
+            onLandmarks(result.first)
+            onPoseSignal(result.second, result.third)
+        } catch (_: Exception) {
+            // MediaPipe can throw during graph re-init/rebind windows; avoid crashing analyzer thread.
+            onLandmarks(emptyList())
+            onPoseSignal(false, 0f)
+        } finally {
+            image.close()
+        }
     }
 
     private fun detect(bitmap: Bitmap, rotationDegrees: Int): Triple<List<OverlayPoint>, Boolean, Float> {
@@ -57,11 +69,16 @@ class PoseLandmarkerAnalyzer(
             val matrix = Matrix().apply { postRotate(rotationDegrees.toFloat()) }
             Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
         }
+        if (isClosed) return Triple(emptyList(), false, 0f)
         val detector = landmarker
         if (detector == null) return Triple(emptyList(), true, -1f)
 
         val mpImage = BitmapImageBuilder(oriented).build()
-        val output: PoseLandmarkerResult = detector.detect(mpImage)
+        val output: PoseLandmarkerResult = try {
+            detector.detect(mpImage)
+        } catch (_: Exception) {
+            return Triple(emptyList(), false, 0f)
+        }
         val pose = output.landmarks().firstOrNull() ?: return Triple(emptyList(), false, 0f)
         val points = pose.map { it.toOverlayPoint() }
 
@@ -75,6 +92,13 @@ class PoseLandmarkerAnalyzer(
     }
 
     fun close() {
-        landmarker?.close()
+        isClosed = true
+        try {
+            landmarker?.close()
+        } catch (_: Exception) {
+            // Ignore close failures during teardown.
+        } finally {
+            landmarker = null
+        }
     }
 }

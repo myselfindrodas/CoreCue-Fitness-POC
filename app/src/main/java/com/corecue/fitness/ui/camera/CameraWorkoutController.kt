@@ -47,6 +47,7 @@ class CameraWorkoutController(
                 .build()
             videoCapture = VideoCapture.withOutput(recorder)
 
+            cameraProvider?.unbindAll()
             analyzer?.close()
             analyzer = PoseLandmarkerAnalyzer(context, onLandmarks, onPoseSignal)
             val analysis = ImageAnalysis.Builder()
@@ -58,7 +59,6 @@ class CameraWorkoutController(
             val selector = if (useFrontCamera) CameraSelector.DEFAULT_FRONT_CAMERA
             else CameraSelector.DEFAULT_BACK_CAMERA
 
-            cameraProvider?.unbindAll()
             cameraProvider?.bindToLifecycle(
                 lifecycleOwner,
                 selector,

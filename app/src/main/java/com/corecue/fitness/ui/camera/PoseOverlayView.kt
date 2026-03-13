@@ -35,6 +35,7 @@ class PoseOverlayView @JvmOverloads constructor(
     }
 
     private var points: List<OverlayPoint> = emptyList()
+    private var showErrorPose: Boolean = false
 
     private val edges = listOf(
         11 to 12, 11 to 13, 13 to 15, 12 to 14, 14 to 16,
@@ -47,9 +48,26 @@ class PoseOverlayView @JvmOverloads constructor(
         postInvalidateOnAnimation()
     }
 
+    fun setPoseErrorState(enabled: Boolean) {
+        post {
+            if (showErrorPose == enabled) return@post
+            showErrorPose = enabled
+            postInvalidateOnAnimation()
+        }
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (points.isEmpty()) return
+        if (showErrorPose) {
+            pointPaint.color = Color.parseColor("#FF6B6B")
+            linePaint.color = Color.parseColor("#FF5A5A")
+            shadowPaint.color = Color.parseColor("#44FF4D4D")
+        } else {
+            pointPaint.color = Color.parseColor("#89F2F0")
+            linePaint.color = Color.parseColor("#7FD7FF")
+            shadowPaint.color = Color.parseColor("#33253066")
+        }
         val radius = max(4f, width * 0.007f)
 
         for ((start, end) in edges) {

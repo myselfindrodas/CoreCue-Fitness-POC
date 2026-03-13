@@ -1,14 +1,17 @@
 package com.corecue.fitness.ui.recording
 
 import android.Manifest
+import android.content.pm.ActivityInfo
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.view.HapticFeedbackConstants
+import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
 import android.view.animation.AnimationUtils
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.view.ViewCompat
@@ -17,19 +20,26 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.corecue.fitness.R
 import com.corecue.fitness.audio.SpeechPriority
 import com.corecue.fitness.audio.TtsCoach
 import com.corecue.fitness.databinding.FragmentRecordingBinding
 import com.corecue.fitness.ui.camera.CameraWorkoutController
+import com.corecue.fitness.ui.camera.OverlayPoint
 import com.corecue.fitness.ui.main.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecordingFragment : Fragment(R.layout.fragment_recording) {
+    companion object {
+        private const val ARG_USE_FRONT_CAMERA = "use_front_camera"
+    }
+
     private var _binding: FragmentRecordingBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
@@ -42,6 +52,7 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
     private var elapsed = 0
     private var postureVisible = false
     private var poseScore = 0f
+    private var latestLandmarks: List<OverlayPoint> = emptyList()
     private var useFrontCamera = true
     private var workoutStarted = false
 
@@ -59,21 +70,30 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentRecordingBinding.bind(view)
+        useFrontCamera = arguments?.getBoolean(ARG_USE_FRONT_CAMERA, true) ?: true
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+        setKeepScreenAwake(true)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            showExitConfirmationDialog()
+        }
 
         binding.pauseBtn.setOnClickListener {
+            playControlTapFeedback(binding.pauseBtn)
             stopWorkoutTimer()
             cameraController?.stopRecording()
             ttsCoach.enqueue("Workout paused.", SpeechPriority.NORMAL)
         }
         binding.stopBtn.setOnClickListener {
+            playControlTapFeedback(binding.stopBtn)
             stopWorkoutTimer()
             cameraController?.stopRecording()
             ttsCoach.enqueue("Workout stopped.", SpeechPriority.CRITICAL)
         }
         binding.submitBtn.setOnClickListener {
+            playControlTapFeedback(binding.submitBtn)
             cameraController?.stopRecording()
             viewModel.loadReport()
-            findNavController().navigate(R.id.action_recording_to_report)
+            navigateToReportPortrait()
         }
         binding.switchCameraBtn.setOnClickListener {
             useFrontCamera = !useFrontCamera
@@ -111,17 +131,19 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
                 it
             ) != android.content.pm.PackageManager.PERMISSION_GRANTED
         }
-        if (missing.isEmpty()) bindCameraAndStart() else permissionLauncher.launch(missing.toTypedArray())
+        if (missing.isEmpty()) {
+            bindCameraAndStart()
+        } else {
+            binding.feedbackCard.isVisible = true
+            binding.feedbackText.text = "Permissions are required. Please allow camera and microphone in splash."
+        }
     }
 
     private fun requiredPermissions(): List<String> {
-        return buildList {
-            add(Manifest.permission.CAMERA)
-            add(Manifest.permission.RECORD_AUDIO)
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-        }
+        return listOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO
+        )
     }
 
     private fun bindCameraAndStart() {
@@ -136,11 +158,14 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
             previewView = binding.previewView,
             useFrontCamera = useFrontCamera,
             onLandmarks = { points ->
+                latestLandmarks = points
                 _binding?.poseOverlay?.updateLandmarks(points)
+                _binding?.poseOverlay?.setPoseErrorState(!isRepPostureValid())
             },
             onPoseSignal = { bodyVisible, score ->
                 postureVisible = bodyVisible
                 poseScore = score
+                _binding?.poseOverlay?.setPoseErrorState(!isRepPostureValid())
             }
         )
     }
@@ -148,7 +173,7 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
     private fun startCountdownThenRecording() {
         workoutStarted = true
         binding.countdownText.isVisible = true
-        countdownTimer = object : CountDownTimer(5000, 1000) {
+        countdownTimer = object : CountDownTimer(3000, 1000) {
             override fun onTick(ms: Long) {
                 val value = (ms / 1000).toInt() + 1
                 binding.countdownText.text = value.toString()
@@ -203,11 +228,16 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
                 elapsed += 1
                 binding.timerText.text = "00:${elapsed.toString().padStart(2, '0')}"
                 if (elapsed % 8 == 0 && repCount < 10) {
-                    repCount += 1
-                    binding.repCounter.text = "Rep $repCount / 10"
-                    if (!postureVisible && poseScore >= 0f) {
+                    val repValid = isRepPostureValid()
+                    if (repValid) {
+                        repCount += 1
+                        binding.repCounter.text = "Rep $repCount / 10"
+                        ttsCoach.enqueue("Good. ${repCountToWords(repCount)}.", SpeechPriority.NORMAL)
+                    } else {
+                        binding.feedbackCard.isVisible = true
+                        binding.feedbackText.text = "Rep not counted. Fix posture and re-center."
                         ttsCoach.enqueue(
-                            "I cannot see your full posture clearly. Please re-center.",
+                            "Rep not counted. I cannot see your full posture clearly. Please re-center.",
                             SpeechPriority.CRITICAL
                         )
                     }
@@ -224,16 +254,119 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
                     cancel()
                     cameraController?.stopRecording()
                     viewModel.loadReport()
-                    findNavController().navigate(R.id.action_recording_to_report)
+                    navigateToReportPortrait()
                 }
             }
 
             override fun onFinish() {
                 cameraController?.stopRecording()
                 viewModel.loadReport()
-                findNavController().navigate(R.id.action_recording_to_report)
+                navigateToReportPortrait()
             }
         }.start()
+    }
+
+    private fun showExitConfirmationDialog() {
+        if (!isAdded) return
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Exit workout?")
+            .setMessage("If you go back now, your recorded footage will be lost.")
+            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton("Yes") { _, _ ->
+                stopWorkoutTimer()
+                countdownTimer?.cancel()
+                cameraController?.stopRecording()
+                recordingFile?.let { file ->
+                    if (file.exists()) file.delete()
+                }
+                navigateHomePortrait()
+            }
+            .show()
+    }
+
+    private fun navigateToReportPortrait() {
+        if (!isAdded) return
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        findNavController().navigate(R.id.action_recording_to_report)
+    }
+
+    private fun navigateHomePortrait() {
+        if (!isAdded) return
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        val navController = findNavController()
+        val poppedToHome = navController.popBackStack(R.id.homeFragment, false)
+        if (!poppedToHome) {
+            navController.navigate(
+                R.id.homeFragment,
+                null,
+                NavOptions.Builder()
+                    .setLaunchSingleTop(true)
+                    .build()
+            )
+        }
+    }
+
+    private fun isRepPostureValid(): Boolean {
+        if (poseScore < 0f) return true
+        if (postureVisible) return true
+        if (poseScore >= 0.32f) return true
+        return hasRequiredRepLandmarks(latestLandmarks)
+    }
+
+    private fun hasRequiredRepLandmarks(points: List<OverlayPoint>): Boolean {
+        if (points.size <= 28) return false
+        val required = listOf(11, 12, 23, 24, 27, 28)
+        return required.all { index ->
+            val p = points[index]
+            p.score >= 0.28f && p.x in 0.01f..0.99f && p.y in 0.01f..0.99f
+        }
+    }
+
+    private fun repCountToWords(rep: Int): String {
+        return when (rep) {
+            1 -> "one"
+            2 -> "two"
+            3 -> "three"
+            4 -> "four"
+            5 -> "five"
+            6 -> "six"
+            7 -> "seven"
+            8 -> "eight"
+            9 -> "nine"
+            10 -> "ten"
+            else -> rep.toString()
+        }
+    }
+
+    private fun playControlTapFeedback(target: View) {
+        target.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        val animator = ObjectAnimator.ofPropertyValuesHolder(
+            target,
+            PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 0.9f, 1f),
+            PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 0.9f, 1f)
+        )
+        animator.duration = 150
+        animator.start()
+    }
+
+    private fun setKeepScreenAwake(enabled: Boolean) {
+        _binding?.root?.keepScreenOn = enabled
+        _binding?.previewView?.keepScreenOn = enabled
+        if (enabled) {
+            requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        } else {
+            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setKeepScreenAwake(true)
+    }
+
+    override fun onPause() {
+        setKeepScreenAwake(false)
+        super.onPause()
     }
 
     private fun stopWorkoutTimer() {
@@ -244,6 +377,8 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
         countdownTimer?.cancel()
         stopWorkoutTimer()
         workoutStarted = false
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        setKeepScreenAwake(false)
         cameraController?.release()
         cameraController = null
         _binding = null

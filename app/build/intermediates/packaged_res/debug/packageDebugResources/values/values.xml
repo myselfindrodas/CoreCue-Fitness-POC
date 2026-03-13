@@ -12,5 +12,7 @@
         <item name="colorSecondary">@color/accent_lavender</item>
         <item name="android:navigationBarColor">@color/bg_dark</item>
         <item name="android:windowLightStatusBar" ns1:targetApi="m">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 </resources>

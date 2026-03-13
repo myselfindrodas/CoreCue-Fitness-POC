@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_calibration_to_demo"
             app:destination="@id/demoVideoFragment" />
+        <action
+            android:id="@+id/action_calibration_to_recording"
+            app:destination="@id/recordingFragment" />
     </fragment>
 
     <fragment
@@ -48,11 +51,4 @@
         android:id="@+id/reportFragment"
         android:name="com.corecue.fitness.ui.report.ReportFragment" />
 
-    <fragment
-        android:id="@+id/historyFragment"
-        android:name="com.corecue.fitness.ui.history.HistoryFragment" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.corecue.fitness.ui.profile.ProfileFragment" />
 </navigation>

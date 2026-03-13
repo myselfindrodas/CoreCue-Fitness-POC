@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Camera body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M20,5H17L15,3H9L7,5H4C2.9,5 2,5.9 2,7V19C2,20.1 2.9,21 4,21H20C21.1,21 22,20.1 22,19V7C22,5.9 21.1,5 20,5Z"
+        android:alpha="0.3"/>
+
+    <!-- Switch arrows (circular arrow indicating flip/switch) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,8C9.52,8 7.5,10.02 7.5,12.5C7.5,13.07 7.61,13.61 7.8,14.11L6.28,15.63C5.79,14.69 5.5,13.63 5.5,12.5C5.5,8.91 8.41,6 12,6V3.5L15.5,7L12,10.5V8Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,17V14.5L8.5,18L12,21.5V19C15.59,19 18.5,16.09 18.5,12.5C18.5,11.37 18.21,10.31 17.72,9.37L16.2,10.89C16.39,11.39 16.5,11.93 16.5,12.5C16.5,14.98 14.48,17 12,17Z" />
+
+</vector>

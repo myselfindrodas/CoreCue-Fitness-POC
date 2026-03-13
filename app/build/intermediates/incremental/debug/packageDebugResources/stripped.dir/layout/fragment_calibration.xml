@@ -9,6 +9,7 @@
         android:id="@+id/preview_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:keepScreenOn="true"
         app:implementationMode="performance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,10 +27,9 @@
 
     <View
         android:id="@+id/silhouette"
-        android:layout_width="220dp"
-        android:layout_height="380dp"
-        android:alpha="0.5"
-        android:background="@drawable/silhouette_outline"
+        android:layout_width="236dp"
+        android:layout_height="398dp"
+        android:background="@drawable/bg_calibration_silhouette"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

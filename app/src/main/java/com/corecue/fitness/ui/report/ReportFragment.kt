@@ -2,6 +2,7 @@ package com.corecue.fitness.ui.report
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +27,9 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentReportBinding.bind(view)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.homeFragment)
+        }
 
         binding.tryAgainBtn.setOnClickListener {
             findNavController().navigate(R.id.recordingFragment)
