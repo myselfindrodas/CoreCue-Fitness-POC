@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
 import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
+import androidx.core.os.bundleOf
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.view.ViewCompat
@@ -38,6 +39,7 @@ import javax.inject.Inject
 class RecordingFragment : Fragment(R.layout.fragment_recording) {
     companion object {
         private const val ARG_USE_FRONT_CAMERA = "use_front_camera"
+        private const val MSG_REP_NOT_COUNTED = "Rep not counted. Fix posture and re-center."
     }
 
     private var _binding: FragmentRecordingBinding? = null
@@ -55,6 +57,8 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
     private var latestLandmarks: List<OverlayPoint> = emptyList()
     private var useFrontCamera = true
     private var workoutStarted = false
+    private var lastInvalidRepPromptAt: Long = 0L
+    private var invalidRepStreakAnnounced = false
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -91,9 +95,9 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
         }
         binding.submitBtn.setOnClickListener {
             playControlTapFeedback(binding.submitBtn)
+            stopWorkoutTimer()
             cameraController?.stopRecording()
-            viewModel.loadReport()
-            navigateToReportPortrait()
+            navigateToReviewPortrait()
         }
         binding.switchCameraBtn.setOnClickListener {
             useFrontCamera = !useFrontCamera
@@ -106,19 +110,29 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
 
     private fun applyEdgeToEdgeInsets() {
         val topInitial = (binding.topMetrics.layoutParams as android.view.ViewGroup.MarginLayoutParams).topMargin
+        val topInitialStart = (binding.topMetrics.layoutParams as android.view.ViewGroup.MarginLayoutParams).marginStart
+        val topInitialEnd = (binding.topMetrics.layoutParams as android.view.ViewGroup.MarginLayoutParams).marginEnd
         val switchInitialTop = (binding.switchCameraBtn.layoutParams as android.view.ViewGroup.MarginLayoutParams).topMargin
+        val switchInitialEnd = (binding.switchCameraBtn.layoutParams as android.view.ViewGroup.MarginLayoutParams).marginEnd
         val controlsInitialBottom = (binding.controls.layoutParams as android.view.ViewGroup.MarginLayoutParams).bottomMargin
+        val controlsInitialStart = (binding.controls.layoutParams as android.view.ViewGroup.MarginLayoutParams).marginStart
+        val controlsInitialEnd = (binding.controls.layoutParams as android.view.ViewGroup.MarginLayoutParams).marginEnd
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             binding.topMetrics.updateLayoutParams<android.view.ViewGroup.MarginLayoutParams> {
                 topMargin = topInitial + bars.top
+                marginStart = topInitialStart + bars.left
+                marginEnd = topInitialEnd + bars.right
             }
             binding.switchCameraBtn.updateLayoutParams<android.view.ViewGroup.MarginLayoutParams> {
                 topMargin = switchInitialTop + bars.top
+                marginEnd = switchInitialEnd + bars.right
             }
             binding.controls.updateLayoutParams<android.view.ViewGroup.MarginLayoutParams> {
                 bottomMargin = controlsInitialBottom + bars.bottom
+                marginStart = controlsInitialStart + bars.left
+                marginEnd = controlsInitialEnd + bars.right
             }
             insets
         }
@@ -165,7 +179,18 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
             onPoseSignal = { bodyVisible, score ->
                 postureVisible = bodyVisible
                 poseScore = score
-                _binding?.poseOverlay?.setPoseErrorState(!isRepPostureValid())
+                val repPostureValidNow = isRepPostureValid()
+                _binding?.poseOverlay?.setPoseErrorState(!repPostureValidNow)
+                if (repPostureValidNow) {
+                    invalidRepStreakAnnounced = false
+                    val b = _binding
+                    if (b != null &&
+                        b.feedbackCard.isVisible &&
+                        b.feedbackText.text.toString() == MSG_REP_NOT_COUNTED
+                    ) {
+                        b.feedbackCard.isVisible = false
+                    }
+                }
             }
         )
     }
@@ -233,13 +258,23 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
                         repCount += 1
                         binding.repCounter.text = "Rep $repCount / 10"
                         ttsCoach.enqueue("Good. ${repCountToWords(repCount)}.", SpeechPriority.NORMAL)
+                        if (binding.feedbackCard.isVisible &&
+                            binding.feedbackText.text.toString() == MSG_REP_NOT_COUNTED
+                        ) {
+                            binding.feedbackCard.isVisible = false
+                        }
                     } else {
                         binding.feedbackCard.isVisible = true
-                        binding.feedbackText.text = "Rep not counted. Fix posture and re-center."
-                        ttsCoach.enqueue(
-                            "Rep not counted. I cannot see your full posture clearly. Please re-center.",
-                            SpeechPriority.CRITICAL
-                        )
+                        binding.feedbackText.text = MSG_REP_NOT_COUNTED
+                        val now = System.currentTimeMillis()
+                        if (!invalidRepStreakAnnounced || now - lastInvalidRepPromptAt > 12000L) {
+                            ttsCoach.enqueue(
+                                "Rep not counted. I cannot see your full posture clearly. Please re-center.",
+                                SpeechPriority.CRITICAL
+                            )
+                            lastInvalidRepPromptAt = now
+                            invalidRepStreakAnnounced = true
+                        }
                     }
                     if (repCount == 5) {
                         binding.feedbackCard.isVisible = true
@@ -253,15 +288,20 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
                 if (repCount >= 10) {
                     cancel()
                     cameraController?.stopRecording()
-                    viewModel.loadReport()
-                    navigateToReportPortrait()
+                    navigateToReviewPortrait()
                 }
             }
 
             override fun onFinish() {
-                cameraController?.stopRecording()
-                viewModel.loadReport()
-                navigateToReportPortrait()
+                if (repCount >= 10) {
+                    cameraController?.stopRecording()
+                    navigateToReviewPortrait()
+                } else {
+                    binding.feedbackCard.isVisible = true
+                    binding.feedbackText.text = "Workout still ongoing. Complete all 10 reps."
+                    ttsCoach.enqueue("Keep going. Complete ten reps.", SpeechPriority.NORMAL)
+                    startWorkoutTimer()
+                }
             }
         }.start()
     }
@@ -288,6 +328,21 @@ class RecordingFragment : Fragment(R.layout.fragment_recording) {
         if (!isAdded) return
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         findNavController().navigate(R.id.action_recording_to_report)
+    }
+
+    private fun navigateToReviewPortrait() {
+        if (!isAdded) return
+        val filePath = recordingFile?.absolutePath.orEmpty()
+        if (filePath.isBlank()) {
+            binding.feedbackCard.isVisible = true
+            binding.feedbackText.text = "No recorded video found. Please retake."
+            return
+        }
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        findNavController().navigate(
+            R.id.action_recording_to_review,
+            bundleOf("recorded_video_path" to filePath)
+        )
     }
 
     private fun navigateHomePortrait() {

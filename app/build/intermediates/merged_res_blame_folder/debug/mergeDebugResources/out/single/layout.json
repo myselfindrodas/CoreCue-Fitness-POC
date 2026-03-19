@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-mergeDebugResources-64:\\layout\\fragment_exercise_detail.xml",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_exercise_detail.xml"
+    },
+    {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-mergeDebugResources-64:\\layout\\item_exercise.xml",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\item_exercise.xml"
     },
@@ -32,16 +36,16 @@
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_profile.xml"
     },
     {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-mergeDebugResources-64:\\layout\\fragment_review_video.xml",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_review_video.xml"
+    },
+    {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-mergeDebugResources-64:\\layout\\fragment_history.xml",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_history.xml"
     },
     {
-        "merged": "com.corecue.fitness.app-mergeDebugResources-64:/layout/fragment_recording.xml",
-        "source": "com.corecue.fitness.app-main-67:/layout/fragment_recording.xml"
-    },
-    {
-        "merged": "com.corecue.fitness.app-mergeDebugResources-64:/layout/fragment_calibration.xml",
-        "source": "com.corecue.fitness.app-main-67:/layout/fragment_calibration.xml"
+        "merged": "com.corecue.fitness.app-mergeDebugResources-64:/layout/fragment_exercise_detail.xml",
+        "source": "com.corecue.fitness.app-main-67:/layout/fragment_exercise_detail.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-mergeDebugResources-64:\\layout\\fragment_recording.xml",

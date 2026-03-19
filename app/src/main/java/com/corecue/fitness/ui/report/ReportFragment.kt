@@ -3,9 +3,11 @@ package com.corecue.fitness.ui.report
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -20,6 +22,10 @@ import com.corecue.fitness.ui.main.MainViewModel
 import kotlinx.coroutines.launch
 
 class ReportFragment : Fragment(R.layout.fragment_report) {
+    companion object {
+        private const val ARG_VIDEO_PATH = "recorded_video_path"
+    }
+
     private var _binding: FragmentReportBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
@@ -27,15 +33,16 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentReportBinding.bind(view)
+        requireActivity().requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            findNavController().navigate(R.id.homeFragment)
+            navigateCalibrationAndDiscardVideo()
         }
 
         binding.tryAgainBtn.setOnClickListener {
             findNavController().navigate(R.id.recordingFragment)
         }
         binding.homeBtn.setOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
+            navigateHome()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -91,6 +98,37 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
             animateXY(700, 700)
             invalidate()
         }
+    }
+
+    private fun navigateHome() {
+        requireActivity().requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        val navController = findNavController()
+        val poppedToHome = navController.popBackStack(R.id.homeFragment, false)
+        if (!poppedToHome) {
+            navController.navigate(
+                R.id.homeFragment,
+                null,
+                NavOptions.Builder()
+                    .setLaunchSingleTop(true)
+                    .build()
+            )
+        }
+    }
+
+    private fun navigateCalibrationAndDiscardVideo() {
+        val videoPath = arguments?.getString(ARG_VIDEO_PATH).orEmpty()
+        if (videoPath.isNotBlank()) {
+            val file = java.io.File(videoPath)
+            if (file.exists()) file.delete()
+        }
+        findNavController().navigate(
+            R.id.calibrationFragment,
+            bundleOf("retake_from_feedback" to true),
+            NavOptions.Builder()
+                .setPopUpTo(R.id.homeFragment, false)
+                .setLaunchSingleTop(true)
+                .build()
+        )
     }
 
     override fun onDestroyView() {

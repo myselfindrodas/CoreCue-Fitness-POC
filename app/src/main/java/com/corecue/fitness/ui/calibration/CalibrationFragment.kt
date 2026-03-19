@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.DecelerateInterpolator
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
@@ -15,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.corecue.fitness.R
 import com.corecue.fitness.audio.SpeechPriority
@@ -40,6 +42,7 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
     private var isCalibrationCompleted = false
     private var currentStep: Step = Step.ORIENTATION
     private var bodyState: BodyState = BodyState.SEARCHING
+    private var silhouetteOrientationListener: View.OnLayoutChangeListener? = null
     private val checkOrientationRunnable = Runnable { waitForLandscape() }
     private val checkPoseRunnable = Runnable { evaluateFullBodyStep() }
 
@@ -68,9 +71,13 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCalibrationBinding.bind(view)
         setKeepScreenAwake(true)
+        applySilhouetteOrientationState()
+        silhouetteOrientationListener = View.OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            applySilhouetteOrientationState()
+        }
+        binding.root.addOnLayoutChangeListener(silhouetteOrientationListener)
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-            findNavController().navigateUp()
+            navigateHomePortrait()
         }
 
         binding.startWorkoutBtn.isVisible = false
@@ -185,6 +192,7 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
     private fun waitForLandscape() {
         val b = _binding ?: return
         if (isLandscapeNow()) {
+            applySilhouetteOrientationState()
             currentStep = Step.FULL_BODY
             b.statusChip.text = "✔ Phone orientation horizontal"
             b.promptText.text = "Step 2/2: Stand back until full body is visible. Hold still for 3 seconds."
@@ -290,9 +298,26 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
         }
     }
 
+    private fun navigateHomePortrait() {
+        if (!isAdded) return
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        val navController = findNavController()
+        val poppedToHome = navController.popBackStack(R.id.homeFragment, false)
+        if (!poppedToHome) {
+            navController.navigate(
+                R.id.homeFragment,
+                null,
+                NavOptions.Builder()
+                    .setLaunchSingleTop(true)
+                    .build()
+            )
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         setKeepScreenAwake(true)
+        applySilhouetteOrientationState()
     }
 
     override fun onPause() {
@@ -303,10 +328,25 @@ class CalibrationFragment : Fragment(R.layout.fragment_calibration) {
     override fun onDestroyView() {
         _binding?.root?.removeCallbacks(checkOrientationRunnable)
         _binding?.root?.removeCallbacks(checkPoseRunnable)
+        silhouetteOrientationListener?.let { listener ->
+            _binding?.root?.removeOnLayoutChangeListener(listener)
+        }
+        silhouetteOrientationListener = null
         setKeepScreenAwake(false)
         cameraController?.release()
         cameraController = null
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun applySilhouetteOrientationState() {
+        val b = _binding ?: return
+        val isLandscape = isLandscapeNow()
+        val targetRotation = if (isLandscape) 90f else 0f
+        b.silhouette.animate()
+            .rotation(targetRotation)
+            .setDuration(240L)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
     }
 }

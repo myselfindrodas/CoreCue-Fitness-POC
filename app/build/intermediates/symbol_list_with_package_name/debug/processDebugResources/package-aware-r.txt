@@ -3302,6 +3302,8 @@ drawable ic_nav_history
 drawable ic_nav_home
 drawable ic_nav_profile
 drawable ic_pause_24
+drawable ic_replay_24
+drawable ic_retake_24
 drawable ic_search_black_24
 drawable ic_splash_logo
 drawable ic_stop_24
@@ -3451,7 +3453,9 @@ id action_container
 id action_context_bar
 id action_demo_to_recording
 id action_divider
-id action_home_to_calibration
+id action_exerciseDetail_to_calibration
+id action_exerciseDetail_to_demo
+id action_home_to_exerciseDetail
 id action_image
 id action_menu_divider
 id action_menu_presenter
@@ -3459,6 +3463,9 @@ id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
 id action_recording_to_report
+id action_recording_to_review
+id action_review_to_calibration
+id action_review_to_report
 id action_splash_to_home
 id action_text
 id actions
@@ -3504,6 +3511,7 @@ id callMeasure
 id camera_switch
 id cancel_action
 id cancel_button
+id card
 id carryVelocity
 id center
 id centerCrop
@@ -3539,6 +3547,8 @@ id cos
 id countdown_text
 id counterclockwise
 id cradle
+id criteria
+id criteria_header
 id currentState
 id custom
 id customPanel
@@ -3591,6 +3601,8 @@ id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id escape
+id exerciseDetailFragment
+id exercise_image
 id exitUntilCollapsed
 id exo_ad_overlay
 id exo_artwork
@@ -3721,6 +3733,7 @@ id line3
 id linear
 id listMode
 id list_item
+id ll_info
 id loading
 id locale
 id logo
@@ -3846,6 +3859,7 @@ id peekHeight
 id percent
 id performance
 id pin
+id play_demo_btn
 id player_view
 id pooling_container_listener_holder_tag
 id pose_overlay
@@ -3866,8 +3880,10 @@ id rep_counter
 id reportFragment
 id report_drawn
 id restart
+id retake_btn
 id reverse
 id reverseSawtooth
+id reviewVideoFragment
 id right
 id rightToLeft
 id right_icon
@@ -3938,7 +3954,7 @@ id startHorizontal
 id startToEnd
 id startVertical
 id start_btn
-id start_recording_btn
+id start_calibration_btn
 id start_workout_btn
 id staticLayout
 id staticPostLayout
@@ -3952,7 +3968,6 @@ id submenuarrow
 id submit_area
 id submit_btn
 id subtitle
-id subtitle_overlay
 id supportScrollUp
 id surface_view
 id switch_camera_btn
@@ -3993,6 +4008,7 @@ id timer_text
 id title
 id titleDividerNoCustom
 id title_template
+id title_text
 id toggle
 id top
 id topPanel
@@ -4185,11 +4201,13 @@ layout exo_styled_sub_settings_list_item
 layout exo_track_selection_dialog
 layout fragment_calibration
 layout fragment_demo_video
+layout fragment_exercise_detail
 layout fragment_history
 layout fragment_home
 layout fragment_profile
 layout fragment_recording
 layout fragment_report
+layout fragment_review_video
 layout fragment_splash
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity

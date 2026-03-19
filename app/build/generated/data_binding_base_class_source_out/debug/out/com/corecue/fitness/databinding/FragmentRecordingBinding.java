@@ -37,6 +37,9 @@ public final class FragmentRecordingBinding implements ViewBinding {
   public final TextView feedbackText;
 
   @NonNull
+  public final LinearLayout llInfo;
+
+  @NonNull
   public final MaterialButton pauseBtn;
 
   @NonNull
@@ -61,21 +64,22 @@ public final class FragmentRecordingBinding implements ViewBinding {
   public final TextView timerText;
 
   @NonNull
-  public final LinearLayout topMetrics;
+  public final MaterialCardView topMetrics;
 
   private FragmentRecordingBinding(@NonNull ConstraintLayout rootView,
       @NonNull LinearLayout controls, @NonNull TextView countdownText,
       @NonNull MaterialCardView feedbackCard, @NonNull TextView feedbackText,
-      @NonNull MaterialButton pauseBtn, @NonNull PoseOverlayView poseOverlay,
-      @NonNull PreviewView previewView, @NonNull TextView repCounter,
-      @NonNull MaterialButton stopBtn, @NonNull MaterialButton submitBtn,
-      @NonNull MaterialButton switchCameraBtn, @NonNull TextView timerText,
-      @NonNull LinearLayout topMetrics) {
+      @NonNull LinearLayout llInfo, @NonNull MaterialButton pauseBtn,
+      @NonNull PoseOverlayView poseOverlay, @NonNull PreviewView previewView,
+      @NonNull TextView repCounter, @NonNull MaterialButton stopBtn,
+      @NonNull MaterialButton submitBtn, @NonNull MaterialButton switchCameraBtn,
+      @NonNull TextView timerText, @NonNull MaterialCardView topMetrics) {
     this.rootView = rootView;
     this.controls = controls;
     this.countdownText = countdownText;
     this.feedbackCard = feedbackCard;
     this.feedbackText = feedbackText;
+    this.llInfo = llInfo;
     this.pauseBtn = pauseBtn;
     this.poseOverlay = poseOverlay;
     this.previewView = previewView;
@@ -138,6 +142,12 @@ public final class FragmentRecordingBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ll_info;
+      LinearLayout llInfo = ViewBindings.findChildViewById(rootView, id);
+      if (llInfo == null) {
+        break missingId;
+      }
+
       id = R.id.pause_btn;
       MaterialButton pauseBtn = ViewBindings.findChildViewById(rootView, id);
       if (pauseBtn == null) {
@@ -187,14 +197,14 @@ public final class FragmentRecordingBinding implements ViewBinding {
       }
 
       id = R.id.top_metrics;
-      LinearLayout topMetrics = ViewBindings.findChildViewById(rootView, id);
+      MaterialCardView topMetrics = ViewBindings.findChildViewById(rootView, id);
       if (topMetrics == null) {
         break missingId;
       }
 
       return new FragmentRecordingBinding((ConstraintLayout) rootView, controls, countdownText,
-          feedbackCard, feedbackText, pauseBtn, poseOverlay, previewView, repCounter, stopBtn,
-          submitBtn, switchCameraBtn, timerText, topMetrics);
+          feedbackCard, feedbackText, llInfo, pauseBtn, poseOverlay, previewView, repCounter,
+          stopBtn, submitBtn, switchCameraBtn, timerText, topMetrics);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

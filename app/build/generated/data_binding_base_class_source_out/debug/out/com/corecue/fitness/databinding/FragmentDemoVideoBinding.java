@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -32,24 +31,15 @@ public final class FragmentDemoVideoBinding implements ViewBinding {
   public final MaterialButton skipBtn;
 
   @NonNull
-  public final MaterialButton startRecordingBtn;
-
-  @NonNull
-  public final TextView subtitleOverlay;
-
-  @NonNull
   public final MaterialButton watchAgainBtn;
 
   private FragmentDemoVideoBinding(@NonNull ConstraintLayout rootView,
       @NonNull LinearLayout controlPanel, @NonNull PlayerView playerView,
-      @NonNull MaterialButton skipBtn, @NonNull MaterialButton startRecordingBtn,
-      @NonNull TextView subtitleOverlay, @NonNull MaterialButton watchAgainBtn) {
+      @NonNull MaterialButton skipBtn, @NonNull MaterialButton watchAgainBtn) {
     this.rootView = rootView;
     this.controlPanel = controlPanel;
     this.playerView = playerView;
     this.skipBtn = skipBtn;
-    this.startRecordingBtn = startRecordingBtn;
-    this.subtitleOverlay = subtitleOverlay;
     this.watchAgainBtn = watchAgainBtn;
   }
 
@@ -98,18 +88,6 @@ public final class FragmentDemoVideoBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.start_recording_btn;
-      MaterialButton startRecordingBtn = ViewBindings.findChildViewById(rootView, id);
-      if (startRecordingBtn == null) {
-        break missingId;
-      }
-
-      id = R.id.subtitle_overlay;
-      TextView subtitleOverlay = ViewBindings.findChildViewById(rootView, id);
-      if (subtitleOverlay == null) {
-        break missingId;
-      }
-
       id = R.id.watch_again_btn;
       MaterialButton watchAgainBtn = ViewBindings.findChildViewById(rootView, id);
       if (watchAgainBtn == null) {
@@ -117,7 +95,7 @@ public final class FragmentDemoVideoBinding implements ViewBinding {
       }
 
       return new FragmentDemoVideoBinding((ConstraintLayout) rootView, controlPanel, playerView,
-          skipBtn, startRecordingBtn, subtitleOverlay, watchAgainBtn);
+          skipBtn, watchAgainBtn);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

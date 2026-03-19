@@ -12,16 +12,12 @@
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_report.xml"
     },
     {
-        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_ic_splash_logo.xml.flat",
-        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_splash_logo.xml"
-    },
-    {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\anim_pulse_soft.xml.flat",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\anim\\pulse_soft.xml"
     },
     {
-        "merged": "com.corecue.fitness.app-debug-65:/layout_fragment_calibration.xml.flat",
-        "source": "com.corecue.fitness.app-main-67:/layout/fragment_calibration.xml"
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_ic_splash_logo.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_splash_logo.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\layout_activity_main.xml.flat",
@@ -30,6 +26,14 @@
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_ic_ex_hamstring.png.flat",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_ex_hamstring.png"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_bg_calibration_glow_ring.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\bg_calibration_glow_ring.xml"
+    },
+    {
+        "merged": "com.corecue.fitness.app-debug-65:/layout_fragment_exercise_detail.xml.flat",
+        "source": "com.corecue.fitness.app-main-67:/layout/fragment_exercise_detail.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_circle_countdown.xml.flat",
@@ -44,12 +48,12 @@
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_ex_roll.xml"
     },
     {
-        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\anim_slide_up_fade.xml.flat",
-        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\anim\\slide_up_fade.xml"
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_ic_replay_24.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_replay_24.xml"
     },
     {
-        "merged": "com.corecue.fitness.app-debug-65:/layout_fragment_recording.xml.flat",
-        "source": "com.corecue.fitness.app-main-67:/layout/fragment_recording.xml"
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\anim_slide_up_fade.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\anim\\slide_up_fade.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\layout_fragment_recording.xml.flat",
@@ -72,12 +76,20 @@
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_ex_roll.png"
     },
     {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_ic_retake_24.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_retake_24.xml"
+    },
+    {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\layout_fragment_profile.xml.flat",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_profile.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\color_bottom_nav_selector.xml.flat",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\color\\bottom_nav_selector.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\layout_fragment_exercise_detail.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_exercise_detail.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\layout_fragment_home.xml.flat",
@@ -98,6 +110,10 @@
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_ic_nav_home.xml.flat",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\ic_nav_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\layout_fragment_review_video.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\layout\\fragment_review_video.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\menu_bottom_nav_menu.xml.flat",
@@ -154,6 +170,10 @@
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_silhouette_outline.xml.flat",
         "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\silhouette_outline.xml"
+    },
+    {
+        "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_bg_calibration_hud.xml.flat",
+        "source": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-main-67:\\drawable\\bg_calibration_hud.xml"
     },
     {
         "merged": "C:\\Users\\Dell\\.gradle\\daemon\\8.9\\com.corecue.fitness.app-debug-65:\\drawable_ic_pause_24.xml.flat",

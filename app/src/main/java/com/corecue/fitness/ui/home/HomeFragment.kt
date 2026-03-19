@@ -22,7 +22,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = FragmentHomeBinding.bind(view)
         val adapter = ExerciseAdapter { exercise ->
             viewModel.selectExercise(exercise)
-            findNavController().navigate(R.id.action_home_to_calibration)
+            findNavController().navigate(R.id.action_home_to_exerciseDetail)
         }
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter

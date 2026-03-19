@@ -16,7 +16,18 @@
         android:id="@+id/homeFragment"
         android:name="com.corecue.fitness.ui.home.HomeFragment">
         <action
-            android:id="@+id/action_home_to_calibration"
+            android:id="@+id/action_home_to_exerciseDetail"
+            app:destination="@id/exerciseDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exerciseDetailFragment"
+        android:name="com.corecue.fitness.ui.exercise.ExerciseDetailFragment">
+        <action
+            android:id="@+id/action_exerciseDetail_to_demo"
+            app:destination="@id/demoVideoFragment" />
+        <action
+            android:id="@+id/action_exerciseDetail_to_calibration"
             app:destination="@id/calibrationFragment" />
     </fragment>
 
@@ -45,6 +56,20 @@
         <action
             android:id="@+id/action_recording_to_report"
             app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_recording_to_review"
+            app:destination="@id/reviewVideoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewVideoFragment"
+        android:name="com.corecue.fitness.ui.review.ReviewVideoFragment">
+        <action
+            android:id="@+id/action_review_to_report"
+            app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_review_to_calibration"
+            app:destination="@id/calibrationFragment" />
     </fragment>
 
     <fragment
